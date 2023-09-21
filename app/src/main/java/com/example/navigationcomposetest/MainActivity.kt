@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -33,15 +34,39 @@ class MainActivity : ComponentActivity() {
                         startDestination = "login",
                         route = "auth"
                     ) {
+
+                        composable("about") {
+
+                        }
                         composable("login") {
+                            val viewModel = it.sharedViewModel<SampleViewModel>(navController)
 
+                            Button(onClick = {
+                                navController.navigate("calendar") {
+                                    popUpTo("auth"){
+                                        inclusive = true
+                                    }
+                                }
+                            }) {
+
+                            }
                         }
-
                         composable("register") {
+                            val viewModel = it.sharedViewModel<SampleViewModel>(navController)
+                        }
+                        composable("forgot_password") {
+                            val viewModel = it.sharedViewModel<SampleViewModel>(navController)
+                        }
+                    }
+
+                    navigation(
+                        startDestination = "calendar_overview",
+                        route = "calendar"
+                    ) {
+                        composable("calendar_overview"){
 
                         }
-
-                        composable("forgot_password") {
+                        composable("calendar_entry"){
 
                         }
                     }
